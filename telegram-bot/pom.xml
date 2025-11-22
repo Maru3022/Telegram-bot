@@ -7,43 +7,42 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
-        <relativePath/> </parent>
+        <version>2.7.18</version>
+        <relativePath/>
+    </parent>
 
     <groupId>com.example</groupId>
     <artifactId>telegram-bot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>telegram-com.example.telegram_bot.TelegramBotApplication.bot</name>
-    <description>Demo project for Spring Boot</description>
+    <name>telegram-bot</name>
+    <description>Telegram Bot with Spring Boot 2.7</description>
 
     <properties>
         <java.version>21</java.version>
-        <lombok.version>1.18.30</lombok.version>
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--        </dependency>-->
+        <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
+        <!-- Telegram Bots (официальная библиотека) -->
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
             <version>6.9.7.1</version>
         </dependency>
 
+        <!-- Lombok (опционально) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version> <optional>true</optional>
+            <optional>true</optional>
         </dependency>
 
+        <!-- Тесты -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -54,21 +53,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>

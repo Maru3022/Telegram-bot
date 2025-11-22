@@ -105,4 +105,35 @@ public class UserData {
         }
         return String.format("%.2f часа", durationHours);
     }
+
+    // Получить общий вес за все тренировки
+    public Optional<Double> getTotalWeight(long chatId) {
+        List<TrainingEntry> history = userTrainingHistory.get(chatId);
+        if (history == null || history.isEmpty()) {
+            return Optional.empty();
+        }
+        double total = history.stream()
+                .mapToDouble(e -> e.weight.orElse(0.0))
+                .sum();
+        return total > 0 ? Optional.of(total) : Optional.empty();
+    }
+
+    // Получить информацию о последней тренировке
+    public Optional<String> getLastTrainingInfo(long chatId) {
+        List<TrainingEntry> history = userTrainingHistory.get(chatId);
+        if (history == null || history.isEmpty()) {
+            return Optional.empty();
+        }
+        TrainingEntry last = history.get(history.size() - 1);
+        StringBuilder sb = new StringBuilder();
+        sb.append("📅 **Последняя тренировка**\n");
+        sb.append("Группа мышц: ").append(last.muscleGroup).append("\n");
+        sb.append("Продолжительность: ").append(getDurationInOtherUnits(last.durationHours)).append("\n");
+        if (last.weight.isPresent()) {
+            sb.append("Вес: ").append(last.weight.get()).append(" кг");
+        } else {
+            sb.append("Вес: не указан");
+        }
+        return Optional.of(sb.toString());
+    }
 }
